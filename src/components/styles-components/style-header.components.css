@@ -1,0 +1,49 @@
+.header{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    width: 100%;
+    height: 10vh;
+    background-color: #000;
+    color: #ffffff;
+    position: relative;
+}
+
+.img-logo{
+    width: 153.62px;
+    height: 32px;
+}
+
+.img-search{
+    width: 24px;
+    height: 24px;
+}
+
+.img-folder-film{
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100vh; /* Ajuste este valor conforme necessário */
+    object-fit: cover;
+    max-height: 55vh;
+}
+
+.navbar{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    margin-top: 10px;
+    color: #ffffff;
+    position: relative;
+    z-index: 2;
+}
+
+.navbar-menu{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 45vh;
+    height: 60px;
+}

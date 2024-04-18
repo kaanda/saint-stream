@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'Inter';
+  src: url('../../public/fonts/Inter-VariableFont_slnt\,wght.ttf') format('truetype');
+  
+}
+body {
+  margin: 0;
+  font-family: 'Inter', 'Helvetica Neue', sans-serif;
+  color: #ffffff;
+}
+
+code {
+  font-family: 'Inter', 'Helvetica Neue', sans-serif;
+}

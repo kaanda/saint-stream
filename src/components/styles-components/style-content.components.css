@@ -1,0 +1,167 @@
+.content{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+    position: relative;
+    z-index: 3;
+    color: black;
+}
+
+.content-details{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100vh;
+    height: 50px;
+    margin: 0px 0px 15px 50px;
+   
+}
+
+.content-details p{
+    margin: 10px 0px 10px 0px;
+}
+
+.content-buttons{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 62vh;
+    height: 50px;
+    margin: 10px 0px 0px 50px;
+    
+}
+
+.button-trailer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 215px;
+    height: 46px;
+    background-color: #00925D;
+    border: 0;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #ffffff;
+}
+.button-favorite{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 215px;
+    height: 46px;
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.button-like{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75px;
+    height: 46px;
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+.content-description{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100vh;
+    height: 50px;
+    margin: 10px 0px 0px 50px;
+    
+}
+
+.content-description h2{
+    font-size: 14px;
+    margin-top: 30px;
+}
+.content-description p{
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.content-actors{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    width: 100vh;
+    height: 50px;
+    margin: 50px 0px 0px 50px;
+}
+.content-actors h2{
+    display: flex;
+    font-size: 14px;
+    margin-right: 10px;
+}
+.content-actors p{
+    display: flex;
+    font-size: 12px;
+}
+.content-movies{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    align-items: flex-end;
+    width: 100vh;
+    height: 50px;
+    margin: 20px 0px 0px 50px;
+}
+
+.content-movies h1{
+    display: flex;
+    width: 100vh;
+    font-size: 16px;
+}
+.content-movies h2{
+    display: flex;
+    font-size: 14px;
+    margin-right: 10px;
+}
+.content-movies span{
+    display: flex;
+    font-size: 12px;
+}
+.content-movie-info{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 70vh;
+    height: 20px;
+    margin-top: 5px;
+}
+.card-movie{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 280px;
+    height: 183px;
+    margin-top: 20px;
+    background-color: #37d42f;
+    border-radius: 10px;
+}
