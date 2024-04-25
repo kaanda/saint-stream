@@ -1,4 +1,5 @@
 import React from "react";
+
 export default function Logo({logoImg}) {
     return (
         <div className="img-logo">
