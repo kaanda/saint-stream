@@ -1,39 +1,49 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CardMovie from "./CardMovie.component";
+import { getPopularMoviesDetails } from "../../service/movies.service";
 
-export default function MovieList() {
-    const movies = [{
-            title: "Filme 1",
-            rating: "16",
-            genre: "Ação",
-            img: ""
-        },
-        {
-            title: "Filme 2",
-            rating: "12",
-            genre: "Comédia",
-            img: ""
-        },
-        {
-            title: "Filme 3",
-            rating: "18",
-            genre: "Terror",
-            img: ""
-    }]
-
-    return (
-        <>
-            {movies.map((movie, index) => (
-                <CardMovie key={index} movie={movie} />
-            ))}
-        </>
-    );
+const style = {
+    fontSize: "15px"
 }
 
-{/* consulta os dados vindos da api de filmes populares
-    vai usar o map para mapear filme a filme para um CardMovie
+export default function MovieList() {
+    const [movies, setMovies] = React.useState([]);
     
-    CardMovie recebe como parâmetro um filme
-    Distribui o conteúdo do filme nas suas posições
+    const getMovies = async () => {
+        const response = await getPopularMoviesDetails();
+        setMovies(response);
+    }
 
-*/}
+    useEffect(() => {
+        getMovies();
+
+        const arrowRight = document.getElementById('arrow-right');
+        const arrowLeft = document.getElementById('arrow-left');
+        const contentMovieList = document.querySelector('.content-movie-list');
+
+        if (arrowRight && arrowLeft && contentMovieList) {
+            arrowRight.addEventListener('click', function() {
+                contentMovieList.scrollBy({ top: 0, left: 200, behavior: 'smooth' });
+            });
+
+            arrowLeft.addEventListener('click', function() {
+                contentMovieList.scrollBy({ top: 0, left: -200, behavior: 'smooth' });
+            });
+        }
+    }, []);
+
+    return (
+        <div className="content-movie-list">
+            {movies.length <= 0 && <h1 style={style}>Carregando...</h1>}
+            <div className="container-movie-list">
+                {movies && movies.map((movie, index) => (
+                    <CardMovie key={index} movie={movie} />
+                ))}
+            </div>            
+
+            <button id="arrow-left" className="arrow" />
+            <button id="arrow-right" className="arrow" />
+
+        </div>
+    );
+}

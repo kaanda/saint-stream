@@ -71,6 +71,7 @@ Tarefas:
 - [ ] Implementar um menu de navegação no rodapé que replique ou complemente as opções disponíveis na barra de navegação do cabeçalho.
 - [ ] Incluir links para as políticas de privacidade, termos de uso, e opções de mudança de idioma no rodapé.
 - [ ] Disponibilizar ícones de mídias sociais para fácil acesso às páginas do site nessas plataformas.
+- [ ] no componente Content tem um <h1>Filmes</h1> -> deixar ele dinâmico para receber filmes ou séries
 
 Cada história de usuário é essencial para guiar o desenvolvimento do projeto, garantindo que o site seja intuitivo, informativo e agradável para os usuários.
 

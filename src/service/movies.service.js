@@ -8,7 +8,7 @@ const options = {
   };
 
   //tmdb reference: https://developers.themoviedb.org/3/movies/get-movie-details
-// faz a chamada para a API do TMDB e retorna o filme com o id passado como parâmetro
+// faz a chamada para a API do TMDB e retorna o detalhe de um filme com o id passado como parâmetro
 const getMovieById= async (id) => {
     return fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, options)
     .then(response => response.json())
@@ -17,18 +17,23 @@ const getMovieById= async (id) => {
 
 //tmdb reference: https://developers.themoviedb.org/3/movies/get-popular-movies
 // faz a chamada para a API do TMDB e retorna os filmes populares
-const getPopularMovies = async () => {
-    return fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', options)
-    .then(response => response.json())
-    .catch(err => console.error(err));
+const getPopularMoviesDetails = async () => {
+    try {
+        const response = await fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', options);
+        const movies = await response.json();
+        const moviePromises = movies.results.map(movie => getMovieById(movie.id));
+        const movieDetails = await Promise.all(moviePromises);
+        return movieDetails;
+    } catch (err) {
+        console.error(err);
+    }
 }
 
 //tmdb reference: https://developers.themoviedb.org/3/movies/get-popular-movies
 // faz a chamada para a API do TMDB e retorna o primeiro filme popular
 const getFirstPopularMovie = async () => {
-    const firstMovie = await getPopularMovies();
-    return firstMovie.results[0];
-
+    const movies = await getPopularMoviesDetails();
+    return movies[0];
 }
 
 //tmdb reference: https://developers.themoviedb.org/3/movies/get-movie-credits
@@ -41,4 +46,4 @@ const getCast = async (id) => {
     .catch(err => console.error(err));
 }
 
-export { getMovieById, getPopularMovies, getFirstPopularMovie, getCast};
+export { getMovieById, getPopularMoviesDetails, getFirstPopularMovie, getCast};

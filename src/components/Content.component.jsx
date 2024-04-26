@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./styles-components/style-content.components.css";
-import folderFilme from "../images/folder-film.png";
 import { getMovieById, getFirstPopularMovie, getCast } from "../service/movies.service";
 import SerieList from "./Series.component/SerieList.component";
 import MovieList from "./Movies.components/MovieList.component";
@@ -48,9 +47,23 @@ export default function Content() {
         getMovie();        
     });
 
+    const styleContentBackground = {
+        backgroundImage: `url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        width: "100%",
+        height: "100vh",
+        position: "relative",
+        zIndex: 0,
+    };
+
     return (
-        <div className="content">
-            {/* <img src={folderFilme} alt="capa do filme" className="img-folder-film"/> */}
+        <div className="content" style={styleContentBackground}>
+            <div className="content-movies-or-series">
+                <h1>Filmes populares</h1> 
+            </div>
+
             <div className="content-sections">
                 <section className="content-details">
                     <h1>{movie.title}</h1>
