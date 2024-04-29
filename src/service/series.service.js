@@ -6,7 +6,7 @@ const options = {
       accept: 'application/json',
       Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMzUyNTE3ZmU3ZTZkNTE2NjlhODI2NWI1ZWU2N2RhYiIsInN1YiI6IjY2MGFiNjM5MGI1ZmQ2MDE2MjM2MjAyNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.KSm6o5Kb9644iG85dZqq8qSEx_w0QVbyO1tBU1sDYCM'
     }
-  };
+};
 
 //tmdb reference: https://developers.themoviedb.org/3/tv/get-popular-tv-shows
 // get séries populares
@@ -37,6 +37,12 @@ const getSeriesDetails = async (idSerie) => {
     return fetch(`https://api.themoviedb.org/3/tv/${idSerie}?language=en-US`, options)
         .then(response => response.json())
         .catch(err => console.error(err));
+}
+
+// faz a chamada para a API do TMDB e retorna o primeira serie
+const getFirstPopularSerie = async () => {
+    const series = await getSeriesDetails();
+    return series[0];
 }
 
 const allSeries = async (allSeriesLimit = 3) => { // Limita a quantidade de séries que serão retornadas para não crashar o navegador
@@ -72,16 +78,17 @@ const allSeries = async (allSeriesLimit = 3) => { // Limita a quantidade de sér
 }
 
 const allSeriesStatic = async () => {
-    //crie uma promisse chamada promissee com um timeout de 5 segundos
+    //cria uma promisse chamada promissee com um timeout de 5 segundos
     const promissee = new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve(seriesJson);
         }, 2000);
     });
     return promissee;
+
 }
 
- export { getPopularSeries, getSeasons, getEpisodes, getSeriesDetails, allSeries, allSeriesStatic};
+ export { getPopularSeries, getSeasons, getEpisodes, getSeriesDetails, allSeries, allSeriesStatic, getFirstPopularSerie};
 
 // criar um novo componente que renderize todas as series populares
 // criar um novo componente que renderize todas as temporadas de uma série

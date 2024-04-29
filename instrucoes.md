@@ -118,3 +118,26 @@ It can be between Minimum Resolution and Maximum Resolution.
 # AJUSTES
 - [ ] todas as fontes do projeto serão na cor branca, incluindo o logo e o search, então se um filme tiver uma imagem de fundo clara, a fonte não será visível. Fazer um ajuste para que a fonte seja preta quando a imagem de fundo for clara e branca quando a imagem de fundo for escura.
 - [ ] 
+
+App 
+  -> Header
+  -> Content
+    -> MoviesContainer.component     
+    -> SeriesContainer.component
+  -> Footer
+App
+
+[X] Criar um componente separado para getCasting e importar ele no MoviesContainer e SeriesContainer
+[X] Criar uma pasta utils e dentro dela criar um arquivo chamado getId.js, importar ele no MoviesContainer e SeriesContainer
+[X] Criar MovieContainer e add o estado nele
+    * add aqui o estado, pois ele é o pai e os filhos vão poder receber o estado por props
+    * importar getId.js
+    * importar getCasting
+    * add aqui primeiro filme que tá sendo chamado no content como background + infos 
+    * toda a <div id="movies">
+[X] Criar SeriesContainer e add o estado nele
+    * add aqui o estado, pois ele é o pai e os filhos vão poder receber o estado por props
+    * importar getId.js
+    * importar getCasting
+    * add aqui primeira serie que tá sendo chamada no content como background + infos 
+    * toda a <div id="serie">

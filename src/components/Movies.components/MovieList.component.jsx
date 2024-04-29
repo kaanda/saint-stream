@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import CardMovie from "./CardMovie.component";
+import CardMedia from "../CardMedia.component";
 import { getPopularMoviesDetails } from "../../service/movies.service";
 
 const style = {
@@ -34,10 +34,13 @@ export default function MovieList() {
 
     return (
         <div className="content-movie-list">
+            <div className="h1-content-movie-list">
+                <h1>Filmes Populares para você</h1>
+            </div>
             {movies.length <= 0 && <h1 style={style}>Carregando...</h1>}
             <div className="container-movie-list">
                 {movies && movies.map((movie, index) => (
-                    <CardMovie key={index} movie={movie} />
+                    <CardMedia key={index} media={movie} mediaType="movie"/>
                 ))}
             </div>            
 
