@@ -6,7 +6,19 @@ import search from "../images/search.png";
 
 
 export default function Header() {
-    const menuItems = ["Início", "Filmes Populares", "Séries populares"];
+    const menuItems = [{
+        //["Início", "Filmes Populares", "Séries populares"]
+        titulo: "Início",
+        link: "/",
+    }, {
+        titulo: "Filmes Populares",
+        link: "/movies",
+    }, {
+        titulo: "Séries Populares",
+        link: "/serie",
+        
+    }];
+    
     const logoImg = logo;
     const searchIcon = search;
 

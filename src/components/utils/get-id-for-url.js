@@ -2,13 +2,16 @@
 //exemplo de url:
 //http://localhost:3000/movie/550
 //http://localhost:3000/serie/550
+//http://localhost:3000/movie
+//http://localhost:3000/serie
 //Url montada:
 //http://localhost:3000/{type}/{id}
+//http://localhost:3000/{type}
 const getIdForUrl = () => {
-    const urlPathname = window.location.pathname;
-    const urlParts = urlPathname.split('/');
-    const urlType = urlParts[urlParts.length - 2];
-    const id = parseInt(urlParts[urlParts.length - 1]);
-    return {id, urlType};
+    const url = window.location.pathname;
+    const urlArray = url.split('/');
+    const urlType = urlArray[1];
+    const id = parseInt(urlArray[2]);
+    return {urlType, id};
 }
 export default getIdForUrl;

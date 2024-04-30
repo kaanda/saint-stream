@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { allSeriesStatic, getFirstPopularSerie, getSeriesDetails } from "../../service/series.service";
+import { allSeriesStatic } from "../../service/series.service";
 import { getCasting } from "../utils/casting";
 import getIdForUrl from "../utils/get-id-for-url";
 import ContentButtons from "../ContentButtons.component";

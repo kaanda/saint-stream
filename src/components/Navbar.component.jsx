@@ -9,14 +9,13 @@ export default function Navbar({ menuItems, searchIcon }) {
                 <Logo logoImg={require("../images/logo.png")} />
                 {menuItems.map((item, index) => (
                     <div key={index}>
-                        <p>{item}</p>
+                       <a href={item.link}>{item.titulo}</a>
                     </div>                
                 ))}
             <div className="navbar-search">
                 <img src={searchIcon} alt="Search" className="img-search" />
             </div>
             </div>
-        {/* colocar cada item div em compoentes separados e chamar aqui */}
         </div>
     );
 }
