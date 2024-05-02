@@ -1,6 +1,4 @@
-import React from "react";
-import { useEffect } from "react";
-import "../styles-components/style-content.components.css";
+import React, { useEffect } from "react";
 import ContentButtons from "../ContentButtons.component";
 import Cast from "../Cast.component";
 import MovieList from "./MovieList.component";

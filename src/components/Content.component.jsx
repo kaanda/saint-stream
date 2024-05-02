@@ -15,7 +15,6 @@ export default function Content() {
         content = <MediaDataProvider>
                     <SeriesContainer />;
                   </MediaDataProvider>
-        console.log('serie');
     }
 
     return (

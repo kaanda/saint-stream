@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import ContentButtons from "../ContentButtons.component";
 import Cast from "../Cast.component";
 import SerieList from "../Series.component/SerieList.component";
