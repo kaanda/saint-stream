@@ -3,13 +3,18 @@ import "./styles-components/style-content.components.css";
 import MoviesContainer from "./Movies.components/MoviesContainer.component";
 import SeriesContainer from "./Series.component/SeriesContainer.component";
 import getIdForUrl from "./utils/get-id-for-url";
+import MediaDataProvider from "../context/MediaDataContext";
 
 export default function Content() {
     const {urlType} = getIdForUrl();
-    let content = <MoviesContainer />;
+    let content = <MediaDataProvider>
+                    <MoviesContainer />
+                  </MediaDataProvider>;
     
     if (urlType === 'serie') {
-        content = <SeriesContainer />;
+        content = <MediaDataProvider>
+                    <SeriesContainer />;
+                  </MediaDataProvider>
         console.log('serie');
     }
 

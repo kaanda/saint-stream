@@ -1,30 +1,14 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import "../styles-components/style-content.components.css";
-import { getFirstPopularMovie, getMovieById } from "../../service/movies.service";
-import { getCasting } from "../utils/casting";
-import getIdForUrl from "../utils/get-id-for-url";
 import ContentButtons from "../ContentButtons.component";
 import Cast from "../Cast.component";
 import MovieList from "./MovieList.component";
+import { useMediaDataContext } from '../../context/MediaDataContext'
 
 export default function MoviesContainer() {
 
-    const [movie, setMovie] = useState({});
-    const [cast, setCast] = useState([]);
-    const {id} = getIdForUrl();   
-
-    // caso o filme não tenha id, ele pega o primeiro filme popular, usando o useState para setar o filme
-    const getMovie = async () => {
-        // aqui no request ele pega o id do filme, se não tiver ele pega o primeiro filme popular
-        const request = id ? getMovieById(id) : getFirstPopularMovie();
-        const response = await request;
-        setMovie(response);
-        // sabendo que o filme tem um id, ele chama a função getCast para pegar o elenco do filme
-        const idMovie = id ? id : response.id;
-        const getcasting = await getCasting(idMovie, 'movie');
-        setCast(getcasting);    
-    }
+    const { movies, cast, getMovie, id } = useMediaDataContext(); 
 
     useEffect(() => {
         // useEffect verifica o ciclo de vida do componente, e quando o componente é montado, ele chama a função getMovie
@@ -33,7 +17,7 @@ export default function MoviesContainer() {
     }, [id]);
 
     const styleContentBackground = {
-        backgroundImage: `url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
+        backgroundImage: `url(https://image.tmdb.org/t/p/w1280${movies.backdrop_path})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -51,13 +35,13 @@ export default function MoviesContainer() {
             </div>
             <div className="content-sections">
                 <section className="content-details">
-                    <h1>{movie.title}</h1>
-                    <p>{movie.release_date} - {movie.genres && movie.genres[0] && movie.genres[0].name}</p>
+                    <h1>{movies.title}</h1>
+                    <p>{movies.release_date} - {movies.genres && movies.genres[0] && movies.genres[0].name}</p>
                 </section>
                 <ContentButtons />
                 <section className="content-description">
                     <h2>Sinopse</h2>
-                    <p>{movie.overview}</p>
+                    <p>{movies.overview}</p>
                 </section>
                 <section className="content-actors">
                     <Cast cast={cast} />

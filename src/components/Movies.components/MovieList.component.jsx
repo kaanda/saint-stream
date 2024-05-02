@@ -1,20 +1,13 @@
 import React, { useEffect } from "react";
 import CardMedia from "../CardMedia.component";
-import { getPopularMoviesDetails } from "../../service/movies.service";
-import Store, {context} from "../../store/Store.component";
+import {moviesList, getMoviesDetails, useMediaDataContext} from "../../context/MediaDataContext"
 
 const style = {
     fontSize: "15px"
 }
 
 export default function MovieList() {
-    // const [movies, setMovies] = React.useState([]);
-    const {setMovies, movies} = React.useContext(context);
-    
-    const getMoviesDetails = async () => {
-        const response = await getPopularMoviesDetails();
-        setMovies(response);
-    }
+    const {moviesList, getMoviesDetails} = useMediaDataContext();
 
     useEffect(() => {
         getMoviesDetails();
@@ -32,18 +25,17 @@ export default function MovieList() {
                 contentMovieList.scrollBy({ top: 0, left: -200, behavior: 'smooth' });
             });
         }
-
     });
 
     return (
-        <Store>
+        
             <div className="content-movie-list">
                 <div className="h1-content-movie-list">
                     <h1>Filmes Populares para você</h1>
                 </div>
-                {movies.length <=0 && <h1 style={style}>Carregando...</h1>}
+                {moviesList.length <=0 && <h1 style={style}>Carregando...</h1>}
                 <div className="container-movie-list">
-                    {movies && movies.map((movie, index) => (
+                    {moviesList && moviesList.map((movie, index) => (
                         <CardMedia key={index} media={movie} mediaType="movie"/>
                     ))}
                 </div>            
@@ -52,6 +44,6 @@ export default function MovieList() {
                 <button id="arrow-right" className="arrow" />
 
             </div>
-        </Store>
+        
     );
 }
