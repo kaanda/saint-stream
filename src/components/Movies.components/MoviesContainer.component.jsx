@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ContentButtons from "../ContentButtons.component";
 import Cast from "../Cast.component";
 import MovieList from "./MovieList.component";
 import { useMediaDataContext } from '../../context/MediaDataContext'
 
 export default function MoviesContainer() {
-
     const { movies, cast, getMovie, id } = useMediaDataContext(); 
+    const [selectedMovie, setSelectedMovie] = useState(movies[0]);
 
     useEffect(() => {
         // useEffect verifica o ciclo de vida do componente, e quando o componente é montado, ele chama a função getMovie
@@ -15,7 +15,7 @@ export default function MoviesContainer() {
     }, [id]);
 
     const styleContentBackground = {
-        backgroundImage: `url(https://image.tmdb.org/t/p/w1280${movies.backdrop_path})`,
+        backgroundImage: selectedMovie ? `url(https://image.tmdb.org/t/p/w1280${selectedMovie.backdrop_path})` : `url(https://image.tmdb.org/t/p/w1280${movies.backdrop_path})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -23,6 +23,10 @@ export default function MoviesContainer() {
         height: "100vh",
         position: "relative",
         zIndex: 0,
+    };
+
+    const handleMovieSelect = (movies) => {
+        setSelectedMovie(movies);
     };
 
     return(
@@ -33,20 +37,28 @@ export default function MoviesContainer() {
             </div>
             <div className="content-sections">
                 <section className="content-details">
-                    <h1>{movies.title}</h1>
-                    <p>{movies.release_date} - {movies.genres && movies.genres[0] && movies.genres[0].name}</p>
+                {selectedMovie && (
+                <>
+                    <h1>{selectedMovie.title}</h1>
+                    <p>{selectedMovie.release_date} - {selectedMovie.genres && selectedMovie.genres[0] && selectedMovie.genres[0].name}</p>
+                </>
+                )}
                 </section>
                 <ContentButtons />
                 <section className="content-description">
                     <h2>Sinopse</h2>
-                    <p>{movies.overview}</p>
+                    {selectedMovie && (
+                    <>
+                    <p>{selectedMovie.overview}</p>
+                    </>
+                    )}
                 </section>
                 <section className="content-actors">
                     <Cast cast={cast} />
                 </section> 
                 <hr className="content-hr" />
                 <section className="content-movies">
-                    <MovieList />                
+                    <MovieList onMovieSelect={handleMovieSelect} />                
                 </section>
             </div>
         </div>                

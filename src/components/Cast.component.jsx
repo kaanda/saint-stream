@@ -2,6 +2,9 @@ import React from 'react';
 import Actor from './Movies.components/Actor.component';
 
 export default function Cast({cast}) {
+    if (!cast || cast.length === 0) {
+        return <p>Não há informações disponíveis sobre o elenco.</p>;
+    }
     
     return (
         <>

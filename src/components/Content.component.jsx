@@ -7,6 +7,7 @@ import MediaDataProvider from "../context/MediaDataContext";
 
 export default function Content() {
     const {urlType} = getIdForUrl();
+
     let content = <MediaDataProvider>
                     <MoviesContainer />
                   </MediaDataProvider>;
@@ -21,5 +22,5 @@ export default function Content() {
         <div>
             {content}
         </div>
-    );
+    )
 }

@@ -139,13 +139,13 @@ App
     * add aqui primeira serie que tá sendo chamada no content como background + infos 
     * toda a <div id="serie">
 
-[] assistir ao trailer - esconde todas as infos do container, deixando somente o header e mostra o trailer
+[] arrumar a busca por cast quando um filme for selecionado no carrossel
 [] arrumar SeriesContainer 
-  [] mostrar carrocel de séries
+  [X] mostrar carrocel de séries
   [] para mostrar as séries e mais detalhes (seasons e episodes)
 [] add detalhes no MoviesContainer e SeriesContainer para sinopse "diferentona"
 [] add api do Cleber para ter sinopse "diferentona"
 [] ?? todas as fontes do projeto serão na cor branca, incluindo o logo e o search, então se um filme tiver uma imagem de fundo clara, a fonte não será visível. Fazer um ajuste para que a fonte seja preta quando a imagem de fundo for clara e branca quando a imagem de fundo for escura.
 [] busca por séries
 [] busca por filmes
-[] usar o ContextApi
+[X] usar o ContextApi

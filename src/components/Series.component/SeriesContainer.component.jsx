@@ -24,7 +24,7 @@ export default function SeriesContainer() {
     };
     
     return(
-        <div id="series" style={styleContentBackground}>
+        <div className="content" style={styleContentBackground}>
              <div className="content-movies-or-series">
                 <h1>Séries populares</h1> 
             </div>

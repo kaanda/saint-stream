@@ -7,12 +7,16 @@ const style = {
     fontSize: "15px"
 }
 
-export default function MovieList() {
-    const {moviesList, getMoviesDetails} = useMediaDataContext();
+export default function MovieList({ onMovieSelect }) {
+    const { moviesList, getMoviesDetails} = useMediaDataContext();
 
     useEffect(() => {
         getMoviesDetails();
     }, []);
+
+    const handleMovieClick = (movies) => {
+        onMovieSelect(movies);
+    };
 
     return (
         <div className="content-movie-list">
@@ -20,9 +24,10 @@ export default function MovieList() {
                 <h1>Filmes Populares para você</h1>
             </div>
             {moviesList.length <=0 && <h1 style={style}>Carregando...</h1>}
+            
             <div className="container-movie-list">
                 {moviesList && moviesList.map((movie, index) => (
-                    <CardMedia key={index} media={movie} mediaType="movie"/>
+                    <CardMedia key={index} media={movie} mediaType="movie" onClick={() => handleMovieClick(movie)}/>
                 ))}
             </div>            
             <ScrollArrows />
