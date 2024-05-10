@@ -8,13 +8,10 @@ const style = {
 }
 
 export default function MovieList({ onMovieSelect }) {
-    const { moviesList, getMoviesDetails} = useMediaDataContext();
-
-    useEffect(() => {
-        getMoviesDetails();
-    }, []);
+    const { moviesList} = useMediaDataContext();
 
     const handleMovieClick = (movies) => {
+        console.log(movies);
         onMovieSelect(movies);
     };
 

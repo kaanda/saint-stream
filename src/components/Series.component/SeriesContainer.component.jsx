@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ContentButtons from "../ContentButtons.component";
 import Cast from "../Cast.component";
 import SerieList from "../Series.component/SerieList.component";
@@ -7,7 +7,7 @@ import { useMediaDataContext } from '../../context/MediaDataContext'
 export default function SeriesContainer() {
 
     const { getSeriesList, serie, series, cast } = useMediaDataContext();
-  
+
     useEffect(() => {
         getSeriesList();        
     }, []);

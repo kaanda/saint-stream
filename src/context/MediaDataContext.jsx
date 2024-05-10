@@ -3,6 +3,7 @@ import { getFirstPopularMovie, getMovieById, getPopularMoviesDetails } from "../
 import { getCasting } from "../components/utils/casting";
 import getIdForUrl from "../components/utils/get-id-for-url";
 import { allSeriesStatic } from "../service/series.service";
+import { getTrailerMovie } from "../service/trailer.service";
 
 const MediaDataContext = createContext();
 export const useMediaDataContext = () => useContext(MediaDataContext);
@@ -14,6 +15,8 @@ export default function Movies({ children }) {
     const [moviesList, setMoviesList] = useState([]);
     const [series, setSeries] = useState([]);
     const [serie, setSerie] = useState({});
+    const [trailerLink, setTrailerLink] = useState('');
+    const [loadingCast, setLoadingCast] = useState(true);
     
     const getSeriesList = async () => {
         const response = await allSeriesStatic();
@@ -27,29 +30,44 @@ export default function Movies({ children }) {
     }
 
     const getCast = async (id) => {
+        setLoadingCast(true);
         const response = await getCasting(id, 'tv');
         setCast(response);
+        setLoadingCast(false);
     }
     
     const getMoviesDetails = async () => {
         const response = await getPopularMoviesDetails();
         setMoviesList(response);
     } 
+
+    const getTrailer = async (id) => {
+        const trailerLink = await getTrailerMovie(id);
+        setTrailerLink(trailerLink);
+    }
     
     const getMovie = async () => {
         // aqui no request ele pega o id do filme, se não tiver ele pega o primeiro filme popular
         const request = id ? getMovieById(id) : getFirstPopularMovie();
         const response = await request;
         setMovies(response);
-        // sabendo que o filme tem um id, ele chama a função getCast para pegar o elenco do filme
         const idMovie = id ? id : response.id;
-        const getcasting = await getCasting(idMovie, 'movie');
-        setCast(getcasting);    
+        applyCast(idMovie);
+        // sabendo que o filme tem um id, ele chama a função getCast para pegar o elenco do filme    
+        getTrailer(idMovie);
+        getMoviesDetails();
+    }
+
+    const applyCast = async (id) => {
+        setLoadingCast(true);
+        const getcasting = await getCasting(id, 'movie');
+        setCast(getcasting);
+        setLoadingCast(false);
     }
     
     return (
         <MediaDataContext.Provider value={{ movies, setMovies, cast, setCast, getMovie, id, moviesList, setMoviesList, getMoviesDetails, 
-                                            getSeriesList, serie, series}}>
+                                            getSeriesList, serie, series, trailerLink, applyCast, loadingCast }}>
             {children}
         </MediaDataContext.Provider>
     );

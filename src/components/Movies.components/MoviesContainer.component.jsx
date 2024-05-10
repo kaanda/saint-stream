@@ -5,17 +5,31 @@ import MovieList from "./MovieList.component";
 import { useMediaDataContext } from '../../context/MediaDataContext'
 
 export default function MoviesContainer() {
-    const { movies, cast, getMovie, id } = useMediaDataContext(); 
+    const { movies, cast, getMovie, trailerLink, applyCast, loadingCast } = useMediaDataContext(); 
     const [selectedMovie, setSelectedMovie] = useState(movies[0]);
-
+    
+   
+    const handleMovieSelect = async (movie) => {
+        await applyCast(movie.id);
+        setSelectedMovie(movie);
+    };
+    
     useEffect(() => {
-        // useEffect verifica o ciclo de vida do componente, e quando o componente é montado, ele chama a função getMovie
-        // ele sempre é renderizado primeiro quando o componente é montado
-        getMovie();      
-    }, [id]);
-
+        // Verificar o ciclo de vida do componente, e quando o componente é montado, chamar a função getMovie
+        getMovie();       
+    }, []);
+    
+    const firstMovies = {
+        title: selectedMovie ? selectedMovie.title : movies.title,
+        release_date: selectedMovie ? selectedMovie.release_date : movies.release_date,
+        genres: selectedMovie ? selectedMovie.genres : movies.genres,
+        overview: selectedMovie ? selectedMovie.overview : movies.overview,
+        backdrop_path: selectedMovie ? `url(https://image.tmdb.org/t/p/w1280${selectedMovie.backdrop_path})` 
+        : `url(https://image.tmdb.org/t/p/w1280${movies.backdrop_path})`
+    }
+    
     const styleContentBackground = {
-        backgroundImage: selectedMovie ? `url(https://image.tmdb.org/t/p/w1280${selectedMovie.backdrop_path})` : `url(https://image.tmdb.org/t/p/w1280${movies.backdrop_path})`,
+        backgroundImage: firstMovies.backdrop_path,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -25,36 +39,32 @@ export default function MoviesContainer() {
         zIndex: 0,
     };
 
-    const handleMovieSelect = (movies) => {
-        setSelectedMovie(movies);
-    };
 
     return(
         <div className="content" style={styleContentBackground}>
             <div className="content-movies-or-series">
-                {/* fazer a condição para mostrar séries ou filmes */}
                 <h1>Filmes populares</h1> 
             </div>
             <div className="content-sections">
                 <section className="content-details">
-                {selectedMovie && (
+                {firstMovies && (
                 <>
-                    <h1>{selectedMovie.title}</h1>
-                    <p>{selectedMovie.release_date} - {selectedMovie.genres && selectedMovie.genres[0] && selectedMovie.genres[0].name}</p>
+                    <h1>{firstMovies.title}</h1>
+                    <p>{firstMovies.release_date} - {firstMovies.genres && firstMovies.genres[0] && firstMovies.genres[0].name}</p>
                 </>
                 )}
                 </section>
-                <ContentButtons />
+                <ContentButtons trailerLink={trailerLink} />
                 <section className="content-description">
                     <h2>Sinopse</h2>
-                    {selectedMovie && (
+                    {firstMovies && (
                     <>
-                    <p>{selectedMovie.overview}</p>
+                        <p>{firstMovies.overview}</p>
                     </>
                     )}
                 </section>
                 <section className="content-actors">
-                    <Cast cast={cast} />
+                    {loadingCast ? <p>Carregando...</p> : <Cast cast={cast} /> }
                 </section> 
                 <hr className="content-hr" />
                 <section className="content-movies">

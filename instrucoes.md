@@ -139,6 +139,8 @@ App
     * add aqui primeira serie que tá sendo chamada no content como background + infos 
     * toda a <div id="serie">
 
+[X] trailer de filmes
+[] trailer de séries
 [] arrumar a busca por cast quando um filme for selecionado no carrossel
 [] arrumar SeriesContainer 
   [X] mostrar carrocel de séries

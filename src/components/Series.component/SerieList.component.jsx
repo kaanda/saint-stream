@@ -12,8 +12,12 @@ export default function SeriesList({series}) {
 
     const [selectedSeries, setSelectedSeries] = useState(null);
 
-    const handleSeriesClick = (serie) => {
-        setSelectedSeries(serie);
+    const handleSeriesClick = async (serie) => {
+        if (selectedSeries === serie) {
+            setSelectedSeries(null); // Se a série clicada for a mesma que já está selecionada, volta ao estado original
+        } else {
+            setSelectedSeries(serie); // Caso contrário, seleciona a série clicada
+        }
     };
 
     return (
@@ -27,16 +31,17 @@ export default function SeriesList({series}) {
                 {series &&
                     series.map((serie, index) => (
                         <div key={index}>
-                            <CardMedia
-                                media={serie}
-                                mediaType="tv"
-                                onClick={() => handleSeriesClick(serie)}
-                            />
-                            {selectedSeries === serie && (
+                            {selectedSeries === serie ? (
                                 <>
                                     <Serie serie={serie} />
                                     <SeasonsList seasons={serie.seasons} />
                                 </>
+                            ) : (
+                                <CardMedia
+                                    media={serie}
+                                    mediaType="tv"
+                                    onClick={() => handleSeriesClick(serie)}
+                                />
                             )}
                         </div>
                     ))}
